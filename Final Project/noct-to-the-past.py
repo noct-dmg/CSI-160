@@ -14,9 +14,17 @@ FPS = 60
 clock = pygame.time.Clock()
 
 # Class for player variables
-class Player:
-    def __init__(self) -> None:
+class Player(pygame.sprite.Sprite):
+    def __init__(self, *groups: pygame.sprite.AbstractGroup) -> None:
+        super().__init__()
+
         self.health = 100
+        self.speed = 5
+
+        self.image = pygame.Surface((32, 32))
+        self.image.fill("cyan")
+
+        self.rect = self.image.get_rect(topleft=(100, 100))
 
     #movement for WASD and arrows
     def movement_handler(self):
@@ -28,6 +36,7 @@ class Player:
 def main():
     # Init variables
     noct = Player()
+    sprites = pygame.sprite.Group(noct)
     running = True
 
     # game running in while statement
